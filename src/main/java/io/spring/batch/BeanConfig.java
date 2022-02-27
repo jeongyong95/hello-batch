@@ -4,11 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.scope.context.ChunkContext;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,21 +19,18 @@ public class BeanConfig {
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Step step() {
-        return this.stepBuilderFactory.get("step1")
-            .tasklet(new Tasklet() {
-                @Override
-                public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                    log.info("Hello, World!");
-                    return RepeatStatus.FINISHED;
-                }
-            }).build();
+    public Job job() {
+        return this.jobBuilderFactory.get("basicJob")
+            .start(this.step())
+            .build();
     }
 
     @Bean
-    public Job job() {
-        return this.jobBuilderFactory.get("job")
-            .start(this.step())
-            .build();
+    public Step step() {
+        return this.stepBuilderFactory.get("step1")
+            .tasklet(((contribution, chunkContext) -> {
+                log.info("Hello, batch!");
+                return RepeatStatus.FINISHED;
+            })).build();
     }
 }

@@ -1,7 +1,7 @@
-package io.spring.batch;
+package io.spring.batch.job.hello;
 
-import io.spring.batch.util.incrementer.TimestampJobParametersIncrementer;
-import io.spring.batch.util.listener.JobExecutionLoggingListener;
+import io.spring.batch.job.incrementer.TimestampJobParametersIncrementer;
+import io.spring.batch.job.listener.JobExecutionLoggingListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(name = "spring.batch.job.name", havingValue = "helloJob")
 @RequiredArgsConstructor
 @Configuration
-public class BeanConfig {
+public class HelloJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;

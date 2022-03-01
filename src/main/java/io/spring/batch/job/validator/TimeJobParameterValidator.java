@@ -1,4 +1,4 @@
-package io.spring.batch.util.validator;
+package io.spring.batch.job.validator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobParameters;

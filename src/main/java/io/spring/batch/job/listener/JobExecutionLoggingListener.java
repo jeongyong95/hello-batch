@@ -1,4 +1,4 @@
-package io.spring.batch.util.listener;
+package io.spring.batch.job.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobExecution;

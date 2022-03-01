@@ -1,4 +1,4 @@
-package io.spring.batch.util.validator;
+package io.spring.batch.job.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.job.CompositeJobParametersValidator;
